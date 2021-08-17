@@ -9,7 +9,7 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: var(--maxWidth);
+  max-width: 1480px;
   padding: 20px;
   margin: 0 auto;
 `;

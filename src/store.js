@@ -5,6 +5,8 @@ const useStore = create((set) => ({
   updateChosenGames: (games) => set((state) => ({ chosenGames: [...games] })),
   initialLineups: [],
   updateInitialLineups: (lineups) => set(state => ({ initialLineups: [...lineups]})),
+  displayedLineups: [],
+  updateDisplayedLineups: (lineups) => set((state) => ({ displayedLineups: [...lineups] })),
   selectedLineups: [],
   updateSelectedLineups: (lineups) => set((state) => ({ selectedLineups: [...lineups] })),
   deselectedIds: [], 

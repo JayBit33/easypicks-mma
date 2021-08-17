@@ -10,12 +10,16 @@ export const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 3rem;
+  padding: 2rem 3rem;
 
   h1 {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Arial', serif;
     text-align: center;
     text-transform: uppercase;
+  }
+
+  h4 {
+    text-align: center;
   }
 
   .submit {
@@ -27,6 +31,10 @@ export const Wrapper = styled.div`
     display: block;
     margin: 0 auto;
     border: none;
+
+    :hover {
+      background-color: #21b522;
+    }
   }
 `;
 

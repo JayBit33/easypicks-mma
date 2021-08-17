@@ -19,13 +19,13 @@ const EasyPicks = () => {
     const [players, setPlayers] = useState([]);
     const [games, setGames] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isReplacing, setIsReplacing] = useState(false);
+
     const chosenGames = useStore(state => state.chosenGames);
-    const selectedLineups = useStore(state => state.selectedLineups);
+    const displayedLineups = useStore(state => state.displayedLineups);
     const updateChosenGames = useStore(state => state.updateChosenGames);
     const updateInitialLineups = useStore(state => state.updateInitialLineups);
-    const updateSelectedLineups = useStore(state => state.updateSelectedLineups);
-
-    console.log('chosenGames', chosenGames)
+    const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups);
 
     useEffect(() => {
       // players will be an array of player objects that contains the following
@@ -55,11 +55,16 @@ const EasyPicks = () => {
 
     // Runs on initial render and anytime chosenGames is updated
     useEffect(() => {
+
+      const maxSalary = 50000
+
       const teamIds = chosenGames.map(game => {
         return [game.homeTeam.teamId, game.awayTeam.teamId]
       })
 
+      // compute lineups returns array of player ids
       const lineupIds = compute(teamIds);
+      // convert array of ids to array of players
       const idsToPlayers = lineupIds.map(lineup => {
         let res = []
         lineup.forEach(id => {
@@ -68,13 +73,25 @@ const EasyPicks = () => {
         return res
       })
 
-      updateInitialLineups(idsToPlayers)
-      updateSelectedLineups(idsToPlayers)
-    }, [chosenGames])
+      console.log('idsToPlayers', idsToPlayers)
+      // create new object for each lineup that contains a unique id
+      const finalLineups = idsToPlayers.map(lineup => {
+        return {
+          id: lineup.reduce((acc, item) => acc + item.teamId, ''),
+          teams: lineup,
+          totalSalary: lineup.reduce((acc, item) => acc + item.salary, 0)
+        }
+      })
+      // Remove lineups with totalSalary over maxSalary
+      updateInitialLineups(finalLineups.filter(l => l.totalSalary <= maxSalary))
+      updateDisplayedLineups(finalLineups.filter(l => l.totalSalary <= maxSalary))
+    }, [chosenGames, players, updateDisplayedLineups])
 
     const replaceGame = (selectedGame) => {
       const selectionsMinusRemoval = chosenGames.filter(game => game.id !== selectedGame.id)
       updateChosenGames(selectionsMinusRemoval)
+      console.log('updateChosenGames called from EasyPicks')
+      setIsReplacing(true)
       setIsModalOpen(!isModalOpen)
     }
     
@@ -88,12 +105,13 @@ const EasyPicks = () => {
           <SelectionModal 
             games={games} 
             players={players} 
+            isReplacing={isReplacing}
             toggleModal={toggleModal}
           />
         }
         <Wrapper blur={isModalOpen} onClick={toggleModal}>
           <Content>
-            <h3 className="resultCount"># of Results: {selectedLineups.length}</h3>
+            <h3 className="resultCount"># of Results: {displayedLineups.length}</h3>
             <Grid>
               <GameList 
                 games={games} 
@@ -101,6 +119,8 @@ const EasyPicks = () => {
                 replaceFight={replaceGame}
               />
               <LineupTable className="table" />
+              <button className="clear" onClick={e => e.stopPropagation()}>Replace All</button>
+              <button className="save" onClick={e => e.stopPropagation()}>Add Selected Lineup's To Picks</button>
             </Grid>
           </Content>
         </Wrapper>

@@ -6,4 +6,9 @@ export const Grid = styled.div`
   grid-template-columns: auto;
   height: 1400px;
   background-color: black;
+  
+  @media only screen and (min-width: 1778px) {
+    grid-template-columns: auto auto;
+    height: 700px;
+  }
 `;

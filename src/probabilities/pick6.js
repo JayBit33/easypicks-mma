@@ -1,11 +1,11 @@
-const teamPicks = [
-  ['Uriah Hall', 'Sean Strickland'],
-  ['Collin Anglin', 'Melsik Baghdasaryan'],
-  ['Bryan Barberena', 'Jason Witt'],
-  ['Chris Gruetzemacher', 'Rafa Garcia'],
-  ['Ryan Benoit', 'Zarrukh Adashev'],
-  ['Philip Rowe', 'Orion Cosce']
-]
+// const teamPicks = [
+//   ['Uriah Hall', 'Sean Strickland'],
+//   ['Collin Anglin', 'Melsik Baghdasaryan'],
+//   ['Bryan Barberena', 'Jason Witt'],
+//   ['Chris Gruetzemacher', 'Rafa Garcia'],
+//   ['Ryan Benoit', 'Zarrukh Adashev'],
+//   ['Philip Rowe', 'Orion Cosce']
+// ]
 
 const lineups = [
   [0,0,0,0,0,0],
@@ -92,7 +92,7 @@ const compute = (fights) => {
   return possibleLineups
 }
 
-const picks = compute(teamPicks)
-console.log(picks, 'length ' + picks.length)
+// const picks = compute(teamPicks)
+// console.log(picks, 'length ' + picks.length)
 
 export default compute;

@@ -10,15 +10,17 @@ import useStore from '../../store';
 // Styles
 import { Grid } from './GameList.styles';
 
-const GameList = ({ games, players, replaceFight }) => {
+const GameList = ({ players, replaceFight }) => {
     const chosenGames = useStore(state => state.chosenGames);
+
+    console.log('chosen games', chosenGames)
 
     const systemOneOn = true
     return (
       <Grid>
         {chosenGames.map(game => {
           return (
-            <div key={game.competitionId}>
+            <div key={game.id}>
               { systemOneOn ? 
               <Game 
                 game={game} 

@@ -7,9 +7,8 @@ export const Wrapper = styled.div`
   grid-row-gap: .25rem;
   align-items: center;
   max-width: 340px;
-  // border: 1px solid lightgrey;
-  // border-bottom: none;
-  border-bottom: 1px solid lightgrey;
+  // border-bottom: 1px solid lightgrey;
+  // border-left: 1px solid lightgrey;
   padding: 1.5rem 2rem 1.5rem 2rem;
 
   div {
@@ -17,12 +16,14 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     h4 {
-      // width: 120px;
-      // white-space: nowrap;
-      // overflow: hidden;
-      // text-overflow: ellipsis;
+      width: 95px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
     }
   }
   h3 {
@@ -38,6 +39,10 @@ export const Wrapper = styled.div`
     cursor: pointer;
     padding: .25rem;
     border: none;
+
+    :hover {
+      background-color: #21b522;
+    }
   }
 
   .active {
