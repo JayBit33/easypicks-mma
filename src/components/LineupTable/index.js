@@ -11,11 +11,14 @@ import { AiFillDelete } from "react-icons/ai";
 const LineupTable = () => {
   const [allSelected, setAllSelected] = useState(false)
   const [onlySelectedShown, setOnlySelectedShown] = useState(false)
+  const [shownLineups, setShownLineups] = useState([])
 
   const displayedLineups = useStore(state => state.displayedLineups)
   const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups)
   const selectedLineups = useStore(state => state.selectedLineups)
   const updateSelectedLineups = useStore(state => state.updateSelectedLineups)
+  const deselectedIds = useStore(state => state.deselectedIds)
+  const setNumberOfLineupsShown = useStore(state => state.setNumberOfLineupsShown)
 
   const selectAll = (e) => {
     e.stopPropagation()
@@ -54,9 +57,20 @@ const LineupTable = () => {
     }
   }
 
+  // remove any lineup containing a teamId that is in deselectedIds.
   useEffect(() => {
-    console.log('lineups changed', displayedLineups)
-  },[displayedLineups])
+    const res = displayedLineups.filter(l => {
+      let filterOut = true
+      l.teams.forEach(team => {
+        if(deselectedIds.includes(team.teamId)) {
+          filterOut = false
+        }
+      }); 
+      return filterOut 
+    });
+    setShownLineups(res)
+    setNumberOfLineupsShown(res.length)
+  },[deselectedIds, displayedLineups])
 
   return (
     <Wrapper className="table">
@@ -75,7 +89,7 @@ const LineupTable = () => {
           </tr>
         </thead>
         <tbody>
-          {displayedLineups.map((lineup) => {
+          {shownLineups.map((lineup) => {
             {
               if (lineup.id !== '')
                 return (

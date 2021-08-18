@@ -26,6 +26,7 @@ const EasyPicks = () => {
     const updateChosenGames = useStore(state => state.updateChosenGames);
     const updateInitialLineups = useStore(state => state.updateInitialLineups);
     const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups);
+    const numberOfLineupsShown = useStore(state => state.numberOfLineupsShown);
 
     useEffect(() => {
       // players will be an array of player objects that contains the following
@@ -111,7 +112,7 @@ const EasyPicks = () => {
         }
         <Wrapper blur={isModalOpen} onClick={toggleModal}>
           <Content>
-            <h3 className="resultCount"># of Results: {displayedLineups.length}</h3>
+            <h3 className="resultCount"># of Results: {numberOfLineupsShown}</h3>
             <Grid>
               <GameList 
                 games={games} 

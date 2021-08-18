@@ -30,14 +30,14 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
         if (homeIsSelected && isSelectable) {
           if (awayIsSelected) {
             setHomeIsSelected(false);
-            const res = displayedLineups.map(lineup => {
-              let shouldAdd = true
-              lineup.teams.forEach(p => {
-                if(p.teamId === homeTeam.teamId) shouldAdd = false
-              })
-              if (shouldAdd) return lineup
-            })
-            updateDisplayedLineups(res.filter(r => r !== undefined))
+            // const res = displayedLineups.map(lineup => {
+            //   let shouldAdd = true
+            //   lineup.teams.forEach(p => {
+            //     if(p.teamId === homeTeam.teamId) shouldAdd = false
+            //   })
+            //   if (shouldAdd) return lineup
+            // })
+            // updateDisplayedLineups(res.filter(r => r !== undefined))
             setDeselectedIds([...deselectedIds, homeTeam.teamId])
           }
         }
@@ -46,16 +46,17 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
           const newIds = deselectedIds.filter(id => id !== homeTeam.teamId)
           setDeselectedIds(newIds)
     
-          const res = initialLineups.map(lineup => {
-            let shouldAdd = false
-            lineup.teams.every(p => {
-              if(p.teamId === homeTeam.teamId) shouldAdd = true
-              if (deselectedIds.includes(p.teamId) && p.teamId !== homeTeam.teamId) { return false; }
-            })
-            if (shouldAdd) return lineup
-          })
-          const reAddedLineups = res.filter(r => r !== undefined)
-          updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
+          // const res = initialLineups.map(lineup => {
+          //   let shouldAdd = false
+          //   lineup.teams.every(p => {
+          //     if(p.teamId === homeTeam.teamId) shouldAdd = true
+          //     if (deselectedIds.includes(p.teamId) && p.teamId !== homeTeam.teamId) { return false; }
+          //   })
+          //   if (shouldAdd) return lineup
+          // })
+          // const reAddedLineups = res.filter(r => r !== undefined)
+          // updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
+          setDeselectedIds(deselectedIds.filter(id => id !== homeTeam.teamId))
         }
         
         
@@ -64,27 +65,31 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
           if (awayIsSelected && isSelectable) {
             if (homeIsSelected) {
               setAwayIsSelected(false);
-              const res = displayedLineups.map(lineup => {
-                let shouldAdd = true
-                lineup.teams.forEach(p => {
-                  if(p.teamId === awayTeam.teamId) shouldAdd = false
-                })
-                if (shouldAdd) return lineup
-              })
-              updateDisplayedLineups(res.filter(r => r !== undefined))
+              setDeselectedIds([...deselectedIds, awayTeam.teamId])
+
+              // const res = displayedLineups.map(lineup => {
+              //   let shouldAdd = true
+              //   lineup.teams.forEach(p => {
+              //     if(p.teamId === awayTeam.teamId) shouldAdd = false
+              //   })
+              //   if (shouldAdd) return lineup
+              // })
+              // updateDisplayedLineups(res.filter(r => r !== undefined))
             }
           }
           else {
             setAwayIsSelected(true)
-            const res = initialLineups.map(lineup => {
-              let shouldAdd = false
-              lineup.teams.forEach(p => {
-                if(p.teamId === awayTeam.teamId) shouldAdd = true
-              })
-              if (shouldAdd) return lineup
-            })
-            const reAddedLineups = res.filter(r => r !== undefined)
-            updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
+            setDeselectedIds(deselectedIds.filter(id => id !== awayTeam.teamId))
+
+            // const res = initialLineups.map(lineup => {
+            //   let shouldAdd = false
+            //   lineup.teams.forEach(p => {
+            //     if(p.teamId === awayTeam.teamId) shouldAdd = true
+            //   })
+            //   if (shouldAdd) return lineup
+            // })
+            // const reAddedLineups = res.filter(r => r !== undefined)
+            // updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
           } 
         break;
       default:
