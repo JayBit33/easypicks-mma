@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background: var(--white);
+  background-color: #181A1B;
+  color: white;
   padding: 0 20px;
+  margin-top: 7rem;
 
   ${props => props.blur ?
     `filter: blur(1rem);
-    opacity: .7;` : ``
+     opacity: .7;` : `filter: none; opacity: 1;`
   }
 
   .save {
@@ -49,16 +51,18 @@ export const Grid = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto auto;
-  grid-row-gap: 1rem;
+  // grid-row-gap: 1rem;
   grid-column-gap: 0rem;
   margin: 0 auto;
-
+  background-color: black;
+  
   .clear {
-    width: 30%;
+    width: 100%;
     margin: 0 auto;
     font-size: 1.25rem;
+    color: white;
     border: none;
-    background-color: #E34C4B;
+    background-color: #981918;
     transition: .3s;
     cursor: pointer;
     
@@ -68,9 +72,15 @@ export const Grid = styled.div`
     }
   }
   .save {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
+    color: white;
     grid-column-start: 2;
     grid-column-end: 3;
+    background-color: #21b522;
+
+    :hover {
+      background-color: green;
+    }
   }
 `;

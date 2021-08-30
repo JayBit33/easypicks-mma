@@ -24,17 +24,20 @@ export const Wrapper = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: center;
+      color: white;
     }
   }
   h3 {
     margin-top: 7.125rem;
     text-align: center;
+    color: white;
   }
 
   button {
     grid-column-start: 1;
     grid-column-end: 4;
     background-color: green;
+    color: white;
     text-transform: uppercase;
     cursor: pointer;
     padding: .25rem;
@@ -49,7 +52,7 @@ export const Wrapper = styled.div`
     opacity: 1;
     filter: brightness(110%);
     transition: .7s;
-    background-color: #eeeeee;
+    background-color: #222222;
   }
 `;
 
@@ -57,6 +60,6 @@ export const PlayerIMG = styled.img`
 width: 90px;
 height: 95px;
 opacity: .5;
-background-color: #dddddd;
+background-color: #222222;
 border-radius: 50%;
 `;

@@ -120,8 +120,8 @@ const EasyPicks = () => {
                 replaceFight={replaceGame}
               />
               <LineupTable className="table" />
-              <button className="clear" onClick={e => e.stopPropagation()}>Replace All</button>
-              <button className="save" onClick={e => e.stopPropagation()}>Add Selected Lineup's To Picks</button>
+                <button className="clear" onClick={e => e.stopPropagation()}>Replace All</button>
+                <button className="save" onClick={e => e.stopPropagation()}>Add Selected Lineup's To Picks</button>
             </Grid>
           </Content>
         </Wrapper>

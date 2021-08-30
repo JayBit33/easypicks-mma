@@ -98,7 +98,7 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
   }
 
   return (
-    <Wrapper style={{ backgroundColor: isSelected ? 'white' : ''}}>
+    <Wrapper style={{ backgroundColor: isSelected ? '#181A1B' : ''}}>
       <div onClick={(e) => setSelected('home', e)}>
         <PlayerIMG src={homeTeam.playerImage160} alt='player image' className={`${homeIsSelected ? "active" : ""}`} />
         <h4>{homeTeam.shortName.substring(2)}</h4>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background-color: black;
-  border: 1px solid white;
+  border: none;
   width: 85%;
   max-width: 1600px;
   z-index: 9;
@@ -20,12 +20,14 @@ export const Wrapper = styled.div`
 
   h4 {
     text-align: center;
+    color: white;
   }
 
   .submit {
     background-color: green;
     font-size: 1.25rem;
     text-transform: uppercase;
+    color: white;
     cursor: pointer;
     padding: 1rem 1rem .75rem 1rem;
     display: block;

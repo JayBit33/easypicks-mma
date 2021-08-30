@@ -16,6 +16,9 @@ const Header = () => (
             <li><Link to='/easy-picks'>
               <p>Make Picks</p>
             </Link></li>
+            <li><Link to='/easy-picks'>
+              <p>Account</p>
+            </Link></li>
           </Nav>
       </Content>
     </Wrapper>

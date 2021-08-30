@@ -16,15 +16,14 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
-    font-family: 'Abel', sans-serif;  
+    font-family: 'Abel', sans-serif; 
   }
 
   body {  
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    opacity: .7;
-    background-color: white;
+    background-color: #181A1B;
     
 
     h1 {

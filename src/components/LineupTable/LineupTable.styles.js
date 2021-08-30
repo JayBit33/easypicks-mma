@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   height: 1400px;
   overflow-y: scroll;
+  background-color: white !important;
 
   @media only screen and (min-width: 1778px) {
     height: 700px;
@@ -38,18 +39,19 @@ position: relative;
   }
 
   tbody {
-    
+    background-color: white;
+
     td {
       padding: .75rem .25rem;
       text-align: center;
     }
 
     tr:nth-child(even) {
-      background-color: lightgrey;\
+      background-color: #292D2F;
     }
-
+    
     tr:nth-child(odd) {
-      // background: brown;
+      background-color: #181A1B;
 
       // button {
       //   background-color: green;
@@ -77,7 +79,8 @@ position: relative;
     border: none;
     cursor: pointer;
     transition: .3s;
-    background-color: pink;
+    background-color: #E34C4B;
+    color: white;
 
       :hover {
         background-color: #21b522;
@@ -108,7 +111,7 @@ position: relative;
       transition: .3s;
   
       :hover {
-        color: pink;
+        color: grey;
       }
     }
   }
