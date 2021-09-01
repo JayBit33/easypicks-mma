@@ -48,12 +48,22 @@ const LineupTable = () => {
 
   const showOnlySelected = () => {
     if (onlySelectedShown) {
-      // updateDisplayedLineups(stored state variable)
-      setOnlySelectedShown(false)
+      setShownLineups([...displayedLineups.filter(l => {
+        let filterOut = true
+        l.teams.forEach(team => {
+          if(deselectedIds.includes(team.teamId)) {
+            filterOut = false
+          }
+        }); 
+        return filterOut 
+      })])
+      setOnlySelectedShown(false) 
+      setNumberOfLineupsShown(displayedLineups.length) 
     } else {
       // store off all current displayedLineups in a state variable before updating displayedLineups to show only selected lineups
-      updateDisplayedLineups(selectedLineups)
+      setShownLineups(displayedLineups.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id)))
       setOnlySelectedShown(true)
+      setNumberOfLineupsShown(displayedLineups.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id)).length)
     }
   }
 

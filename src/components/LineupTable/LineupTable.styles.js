@@ -3,7 +3,23 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   height: 1400px;
   overflow-y: scroll;
-  background-color: white !important;
+  background-color: #292D2F;
+
+  &::-webkit-scrollbar {
+    width: 11px;
+  }
+  & {
+    scrollbar-width: thin;
+    scrollbar-color: var(--lightGrey) black;
+  }
+  &::-webkit-scrollbar-track {
+    background: black;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--lightGrey) ;
+    border-radius: 6px;
+    border: 3px solid black;
+  }
 
   @media only screen and (min-width: 1778px) {
     height: 700px;

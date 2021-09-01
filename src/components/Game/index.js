@@ -5,21 +5,19 @@ import { PlayerIMG, Wrapper } from './Game.styles';
 // Store 
 import useStore from '../../store';
 
-const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }) => {
+const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect, isGameList }) => {
   
   const [homeIsSelected, setHomeIsSelected] = useState(true);
   const [awayIsSelected, setAwayIsSelected] = useState(true);
+  const [selectedGameIds, setSelectedGameIds] = useState([]); // handles initial selections in SelectionModal so background changes color when selected
   
-  const initialLineups = useStore(state => state.initialLineups)
-  const displayedLineups = useStore(state => state.displayedLineups)
-  const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups)
   const deselectedIds = useStore(state => state.deselectedIds)
   const setDeselectedIds = useStore(state => state.setDeselectedIds)
-  const [isSelected, setIsSelected] = useState(false);
-
+  const chosenGames = useStore(state => state.chosenGames);
 
   const homeTeam = players.filter(player => game.homeTeam.teamId === player.teamId)[0];
   const awayTeam = players.filter(player => game.awayTeam.teamId === player.teamId)[0];
+  const markedSelected = selectedGameIds.includes(game.id) || chosenGames.map(game => game.id).includes(game.id) && !isGameList
 
   const setSelected = (team, e) => {
     console.log('setSelected called')
@@ -30,14 +28,6 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
         if (homeIsSelected && isSelectable) {
           if (awayIsSelected) {
             setHomeIsSelected(false);
-            // const res = displayedLineups.map(lineup => {
-            //   let shouldAdd = true
-            //   lineup.teams.forEach(p => {
-            //     if(p.teamId === homeTeam.teamId) shouldAdd = false
-            //   })
-            //   if (shouldAdd) return lineup
-            // })
-            // updateDisplayedLineups(res.filter(r => r !== undefined))
             setDeselectedIds([...deselectedIds, homeTeam.teamId])
           }
         }
@@ -45,17 +35,6 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
           setHomeIsSelected(true)
           const newIds = deselectedIds.filter(id => id !== homeTeam.teamId)
           setDeselectedIds(newIds)
-    
-          // const res = initialLineups.map(lineup => {
-          //   let shouldAdd = false
-          //   lineup.teams.every(p => {
-          //     if(p.teamId === homeTeam.teamId) shouldAdd = true
-          //     if (deselectedIds.includes(p.teamId) && p.teamId !== homeTeam.teamId) { return false; }
-          //   })
-          //   if (shouldAdd) return lineup
-          // })
-          // const reAddedLineups = res.filter(r => r !== undefined)
-          // updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
           setDeselectedIds(deselectedIds.filter(id => id !== homeTeam.teamId))
         }
         
@@ -66,30 +45,11 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
             if (homeIsSelected) {
               setAwayIsSelected(false);
               setDeselectedIds([...deselectedIds, awayTeam.teamId])
-
-              // const res = displayedLineups.map(lineup => {
-              //   let shouldAdd = true
-              //   lineup.teams.forEach(p => {
-              //     if(p.teamId === awayTeam.teamId) shouldAdd = false
-              //   })
-              //   if (shouldAdd) return lineup
-              // })
-              // updateDisplayedLineups(res.filter(r => r !== undefined))
             }
           }
           else {
             setAwayIsSelected(true)
             setDeselectedIds(deselectedIds.filter(id => id !== awayTeam.teamId))
-
-            // const res = initialLineups.map(lineup => {
-            //   let shouldAdd = false
-            //   lineup.teams.forEach(p => {
-            //     if(p.teamId === awayTeam.teamId) shouldAdd = true
-            //   })
-            //   if (shouldAdd) return lineup
-            // })
-            // const reAddedLineups = res.filter(r => r !== undefined)
-            // updateDisplayedLineups([...reAddedLineups, ...displayedLineups])
           } 
         break;
       default:
@@ -98,7 +58,7 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
   }
 
   return (
-    <Wrapper style={{ backgroundColor: isSelected ? '#181A1B' : ''}}>
+    <Wrapper style={{ backgroundColor: markedSelected ? '#181A1B' : ''}}>
       <div onClick={(e) => setSelected('home', e)}>
         <PlayerIMG src={homeTeam.playerImage160} alt='player image' className={`${homeIsSelected ? "active" : ""}`} />
         <h4>{homeTeam.shortName.substring(2)}</h4>
@@ -108,7 +68,7 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect }
         <PlayerIMG src={awayTeam.playerImage160} alt='player image' className={`${awayIsSelected ? "active" : ""}`} />
         <h4>{awayTeam.shortName.substring(2)}</h4>
       </div>
-      <button onClick={ isSelectable ? replaceFight : () => onSelect(game, setIsSelected)}>{buttonText}</button>
+      <button onClick={ isSelectable ? replaceFight : () => onSelect(game, setSelectedGameIds)}>{buttonText}</button>
     </Wrapper>
   )
 };

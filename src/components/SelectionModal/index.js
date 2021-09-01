@@ -24,8 +24,8 @@ const SelectionModal = ({ games, players, isReplacing, toggleModal }) => {
     console.log('selections from useEffect', selections)
   },[chosenGames])
 
-  const addOrReplaceGame = (game, setIsSelected) => {
-    setIsSelected(true)
+  const addOrReplaceGame = (game, setSelectedGameIds) => {
+    setSelectedGameIds(prev => [...prev, game.id])
     if (isReplacing) {
       console.log(selections)
       if (selections.filter(s => s.id === game.id).length > 0) {

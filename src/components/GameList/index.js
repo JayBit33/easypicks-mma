@@ -28,6 +28,7 @@ const GameList = ({ players, replaceFight }) => {
                 buttonText="Replace Fight" 
                 isSelectable={true} 
                 replaceFight={() => replaceFight(game)} 
+                isGameList={true}
               /> :
               <Match 
                 game={game} 

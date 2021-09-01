@@ -15,6 +15,9 @@ const App = () => (
       <Route path='/easy-picks' element={<EasyPicks />} />
     </Routes>
     <GlobalStyle />
+    <div className="footer">
+      @copyright 2021 waveybits
+    </div>
   </Router>
 );
 
