@@ -29,6 +29,23 @@ export const Nav = styled.ul`
     p {
       font-size: var(--fontMed);
       color: white;
+      line-height: 1.625rem;
+
+      .badge {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-block;
+        border-radius: 50%;
+        margin: 0 .25rem;
+        background-color: green;
+        color: white;
+        font-family: 'Montserrat';
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.625rem;
+        position: relative;
+        bottom: .5rem;
+      }
     }
   }
   

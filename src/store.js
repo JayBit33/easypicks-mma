@@ -12,7 +12,9 @@ const useStore = create((set) => ({
   deselectedIds: [], 
   setDeselectedIds: (ids) => set(state => ({ deselectedIds: [...ids] })),
   numberOfLineupsShown: 0,
-  setNumberOfLineupsShown: (amount) => set(state => ({ numberOfLineupsShown: amount}))
+  setNumberOfLineupsShown: (amount) => set(state => ({ numberOfLineupsShown: amount})),
+  savedPicks: [],
+  updateSavedPicks: (picks) => set(state => ({ savedPicks: [...picks]}))
 }))
 
 export default useStore;

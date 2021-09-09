@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     --fontBig: 1.5rem;
     --fontMed: 1.2rem;
     --fontSmall: 1rem;
+    position: relative;
+
   }
 
   * {
@@ -41,8 +43,6 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     background-color: var(--medGrey);
 
-    
-
     h1 {
       font-size: 2rem;
       font-weight: 600;
@@ -69,6 +69,10 @@ export const GlobalStyle = createGlobalStyle`
       color: white;
       text-align: center;
       padding-top: 100px;
+
+      @media only screen and (min-width: 1778px) {
+        position: relative;
+      }
     }
   }
 `;

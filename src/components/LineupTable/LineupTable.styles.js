@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   height: 1400px;
   overflow-y: scroll;
+  overflow-x: none;
   background-color: #292D2F;
-
+  
   &::-webkit-scrollbar {
     width: 11px;
   }
@@ -27,11 +28,11 @@ export const Wrapper = styled.div`
 `;
 
 export const Table = styled.table`
-border-spacing: 0;
-border-collapse: collapse;
-max-height: 900px;
-min-width: 860px;
-position: relative;
+  border-spacing: 0;
+  border-collapse: collapse;
+  max-height: 900px;
+  min-width: 860px;
+  position: relative;
 
   thead {
     position: sticky;
@@ -101,7 +102,6 @@ position: relative;
       :hover {
         background-color: #21b522;
       }
-    }
   }
 
   .actions {
@@ -110,7 +110,7 @@ position: relative;
     align-items: center;
     margin-top: 1.25rem;
     margin-right: 3rem;
-
+    
     .selected {
       background-color: green;
 
@@ -130,6 +130,7 @@ position: relative;
         color: grey;
       }
     }
+
   }
 `;
 

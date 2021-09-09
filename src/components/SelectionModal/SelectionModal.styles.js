@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   background-color: black;
   border: none;
   width: 85%;
-  max-width: 1600px;
+  max-width: 1100px;
   z-index: 9;
   position: absolute;
   top: 50%;
@@ -38,12 +38,16 @@ export const Wrapper = styled.div`
       background-color: #21b522;
     }
   }
+
+  @media only screen and (min-width: 1550px) {
+      max-width: 1600px;
+  }
 `;
 
 export const Grid = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fill, auto);
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto;
   grid-row-gap: .5rem;
   grid-column-gap: .75rem;
   align-items: center;
@@ -51,4 +55,12 @@ export const Grid = styled.div`
   height: 800px;
   overflow-y: scroll;
   scrollbar-width: thin;
+  margin-bottom: 2rem;
+
+  @media only screen and (min-width: 1550px) {
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-template-columns: auto auto auto auto;
+    grid-row-gap: .5rem;
+    grid-column-gap: .75rem;
+  }
 `;

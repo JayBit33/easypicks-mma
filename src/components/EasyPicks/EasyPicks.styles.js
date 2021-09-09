@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   color: white;
   padding: 0 20px;
   margin-top: 7rem;
+  margin-bottom: 14rem;
 
   ${props => props.blur ?
     `filter: blur(1rem);
