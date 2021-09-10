@@ -23,10 +23,10 @@ const Header = () => {
             <li><Link to='/easy-picks'>
               <p>Easy Picker</p>
             </Link></li>
-            <li><Link to='/easy-picks'>
+            <li><Link to='/picks'>
               <p>Picks<span className="badge">{savedPicks.length}</span></p>
             </Link></li>
-            <li><Link to='/easy-picks'>
+            <li><Link to='/account'>
               <p>Account</p>
             </Link></li>
           </Nav>

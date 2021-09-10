@@ -9,7 +9,16 @@ export const Wrapper = styled.div`
 
   ${props => props.blur ?
     `filter: blur(1rem);
-     opacity: .7;` : `filter: none; opacity: 1;`
+     opacity: .7;` 
+     : 
+     `filter: none; 
+     opacity: 1;`
+  }
+
+  .toast {
+    margin-top: 3rem;
+    position: relative;
+    top: 3rem;
   }
 
   .save {
@@ -35,6 +44,8 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
   max-width: 1900px;
   padding: 20px;
   margin: 0 auto;
@@ -42,9 +53,9 @@ export const Content = styled.div`
   position: relative;
 
   .resultCount {
-    position: absolute;
-    right: 13.5rem;
-    top: -2rem;
+    padding-top: 3rem;
+    margin: 0 auto;
+    transform: translateX(510%)
   }
 `;
 
@@ -55,6 +66,7 @@ export const Grid = styled.div`
   // grid-row-gap: 1rem;
   grid-column-gap: 0rem;
   margin: 0 auto;
+  margin-top: 1rem;
   background-color: black;
   
   .clear {

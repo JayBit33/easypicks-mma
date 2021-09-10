@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   left: 50%;
   top: 4%;
   transform: translateX(-50%);
+  margin-top: 4rem;
   margin-bottom: 2rem;
   `;
   

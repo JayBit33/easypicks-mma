@@ -5,6 +5,7 @@ import lineups from '../../fighters';
 import GameList from '../GameList';
 import LineupTable from '../LineupTable';
 import SelectionModal from '../SelectionModal';
+import Toast from '../Toast';
 
 // Store
 import useStore from '../../store'
@@ -20,6 +21,7 @@ const EasyPicks = () => {
     const [games, setGames] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isReplacing, setIsReplacing] = useState(false);
+    const [toastMessage, setToastMessage] = useState('')
 
     const chosenGames = useStore(state => state.chosenGames);
     const updateChosenGames = useStore(state => state.updateChosenGames);
@@ -113,6 +115,7 @@ const EasyPicks = () => {
     const savePicks = (e) => {
       e.stopPropagation()
       updateSavedPicks([...savedPicks, ...selectedLineups])
+      setToastMessage('Your Lineup Selections Have Been Saved')
     }
 
     return (
@@ -126,6 +129,9 @@ const EasyPicks = () => {
           />
         }
         <Wrapper blur={isModalOpen} onClick={toggleModal}>
+          {
+            toastMessage && <Toast msg={toastMessage} className="toast" />
+          }
           <Content>
             <h3 className="resultCount"># of Results: {numberOfLineupsShown}</h3>
             <Grid>

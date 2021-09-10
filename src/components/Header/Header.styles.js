@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   background-color: black;
   padding: 0 20px;
+  margin-bottom: 4rem;
 `;
 
 export const Content = styled.div`
@@ -10,7 +11,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 1480px;
-  padding: .25remj;
+  padding: .25rem;
   margin: 0 auto;
 `;
 
