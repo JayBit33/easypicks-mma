@@ -24,7 +24,7 @@ const LineupTable = () => {
     e.stopPropagation()
     if (!allSelected) {
       setAllSelected(true)
-      updateSelectedLineups([...displayedLineups])
+      updateSelectedLineups([...shownLineups])
     } else {
       setAllSelected(false)
       updateSelectedLineups([])
