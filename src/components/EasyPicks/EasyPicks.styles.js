@@ -47,7 +47,6 @@ export const Content = styled.div`
   position: relative;
 
   .resultCount {
-    padding-top: 3rem;
     margin: 0 auto;
     transform: translateX(510%)
   }

@@ -68,7 +68,7 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect, 
         <PlayerIMG src={awayTeam.playerImage160} alt='player image' className={`${awayIsSelected ? "active" : ""}`} />
         <h4>{awayTeam.shortName.substring(2)}</h4>
       </div>
-      <button style={{ backgroundColor: markedSelected ? 'rgb(227,76,75)' : ''}} onClick={ isSelectable ? replaceFight : () => onSelect(game, setSelectedGameIds)}>{!markedSelected ? buttonText : 'Unselect'}</button>
+      <button style={{ backgroundColor: markedSelected ? 'rgb(227,76,75)' : ''}} onClick={ isSelectable ? replaceFight : () => onSelect(game, setSelectedGameIds)}>{!markedSelected ? buttonText : 'Unselect Match'}</button>
     </Wrapper>
   )
 };

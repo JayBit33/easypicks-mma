@@ -156,7 +156,7 @@ const EasyPicks = () => {
         }
         <Wrapper blur={isModalOpen} onClick={toggleModal}>
           {
-            toastMessage && <Toast msg={toastMessage} className="toast" />
+            toastMessage && <Toast msg={toastMessage} />
           }
           <Content>
             <h3 className="resultCount"># of Results: {numberOfLineupsShown}</h3>
@@ -166,7 +166,7 @@ const EasyPicks = () => {
                 players={players} 
                 replaceFight={replaceGame}
               />
-              <LineupTable className="table" />
+              <LineupTable className="table" setErrorMessage={setToastMessage} />
                 <button className="clear" onClick={e => replaceAll(e)}>Replace All</button>
                 <button className="save" onClick={e => savePicks(e)}>Add Selected Lineup's To Picks</button>
             </Grid>

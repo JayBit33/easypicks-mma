@@ -8,7 +8,7 @@ import { PlayerIMG, Table, Wrapper } from './LineupTable.styles'
 // Icons
 import { AiFillDelete } from "react-icons/ai";
 
-const LineupTable = () => {
+const LineupTable = ({ setErrorMessage }) => {
   const [allSelected, setAllSelected] = useState(false)
   const [onlySelectedShown, setOnlySelectedShown] = useState(false)
   const [shownLineups, setShownLineups] = useState([])
@@ -61,11 +61,15 @@ const LineupTable = () => {
       setOnlySelectedShown(false) 
       setNumberOfLineupsShown(shown.length) 
     } else {
-      // store off all current displayedLineups in a state variable before updating displayedLineups to show only selected lineups
-      const shown = displayedLineups.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id))
-      setShownLineups(shown)
-      setOnlySelectedShown(true)
-      setNumberOfLineupsShown(shown.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id)).length)
+      if (selectedLineups.length === 0) {
+        setErrorMessage('No Lineups Are Currently Selected')
+      } else {
+        // store off all current displayedLineups in a state variable before updating displayedLineups to show only selected lineups
+        const shown = displayedLineups.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id))
+        setShownLineups(shown)
+        setOnlySelectedShown(true)
+        setNumberOfLineupsShown(shown.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id)).length)
+      }
     }
   }
 
