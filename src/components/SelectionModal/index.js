@@ -10,10 +10,11 @@ import useStore from '../../store';
 // Styles
 import { Wrapper, Grid } from './SelectionModal.styles';
 
+sessionStorage.setItem('chosenGames', [])
+
 const SelectionModal = ({ games, players, isReplacing, toggleModal }) => {
   const [selections, updateSelections] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-
   const chosenGames = useStore(state => state.chosenGames);
   const updateChosenGames = useStore(state => state.updateChosenGames);
   const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups);
@@ -22,6 +23,7 @@ const SelectionModal = ({ games, players, isReplacing, toggleModal }) => {
     if (chosenGames.length > 0) updateSelections(chosenGames) 
     console.log('chosen games updated', chosenGames)
     console.log('selections from useEffect', selections)
+    sessionStorage.setItem('chosenGames', JSON.stringify(chosenGames))
   },[chosenGames])
 
   const addOrReplaceGame = (game, setSelectedGameIds) => {

@@ -16,8 +16,8 @@ import compute from '../../probabilities/pick6';
 // Styles
 import { Wrapper, Content, Grid } from './EasyPicks.styles';
 
+// SessionStorage Keys
 const PLAYER_KEY= 'players';
-sessionStorage.setItem(PLAYER_KEY, [])
 
 const EasyPicks = () => {
     const sessionPlayerData = sessionStorage.getItem('players');
@@ -25,7 +25,7 @@ const EasyPicks = () => {
 
     const [players, setPlayers] = useState(playersState);
     const [games, setGames] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isReplacing, setIsReplacing] = useState(false);
     const [toastMessage, setToastMessage] = useState('')
 
@@ -60,10 +60,23 @@ const EasyPicks = () => {
         }
       })
 
+      // Handle page refresh so that player and chosenGames state is not lost
+      if (window.performance) {
+        if (performance.navigation.type == 1) {
+          // This page has been reloaded
+          setIsModalOpen(false)
+        } else {
+          // This page is not reloaded
+          sessionStorage.setItem(PLAYER_KEY, [])
+          setIsModalOpen(true)
+        }
+      }
+
       setPlayers(playerInfos);
       setGames(gameInfo);
     }, [])
 
+    // anytime players is updated update players in sessionStorage
     useEffect(() => {
       sessionStorage.setItem(PLAYER_KEY, JSON.stringify(players))
     },[players])
@@ -99,6 +112,10 @@ const EasyPicks = () => {
       // Remove lineups with totalSalary over maxSalary
       updateInitialLineups(finalLineups.filter(l => l.totalSalary <= maxSalary))
       updateDisplayedLineups(finalLineups.filter(l => l.totalSalary <= maxSalary))
+
+      // anytime chosenGames is updated update chosenGames in sessionStorage
+      sessionStorage.setItem('chosenGames', JSON.stringify(chosenGames))
+
     }, [chosenGames, players, updateDisplayedLineups])
 
     const replaceGame = (selectedGame) => {

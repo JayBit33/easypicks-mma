@@ -1,7 +1,10 @@
 import create from 'zustand';
 
+const sessionData = sessionStorage.getItem('chosenGames');
+let chosenState = sessionData && sessionData !== [] ? JSON.parse(sessionData) : []
+
 const useStore = create((set) => ({
-  chosenGames: [],
+  chosenGames: [...chosenState],
   updateChosenGames: (games) => set((state) => ({ chosenGames: [...games] })),
   initialLineups: [],
   updateInitialLineups: (lineups) => set(state => ({ initialLineups: [...lineups]})),
