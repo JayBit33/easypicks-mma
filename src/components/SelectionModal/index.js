@@ -57,7 +57,10 @@ const SelectionModal = ({ games, players, isReplacing, toggleModal }) => {
       errorMsg = `Must select ${6 - selections.length} more games`
       hasError = true
     }
-    if (hasError) setErrorMessage(errorMsg);
+    if (hasError) {
+      setErrorMessage(errorMsg)
+      setTimeout(() => setErrorMessage(null) , 2500);
+    }
     else {
       updateSelectedGames();
     }

@@ -13,7 +13,9 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect, 
   
   const deselectedIds = useStore(state => state.deselectedIds)
   const setDeselectedIds = useStore(state => state.setDeselectedIds)
-  const chosenGames = useStore(state => state.chosenGames);
+  const chosenGames = useStore(state => state.chosenGames)
+  const setAllSelected = useStore(state => state.setAllSelected)
+  const setOnlySelectedShown = useStore(state => state.setOnlySelectedShown)
 
   const homeTeam = players.filter(player => game.homeTeam.teamId === player.teamId)[0];
   const awayTeam = players.filter(player => game.awayTeam.teamId === player.teamId)[0];
@@ -37,8 +39,9 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect, 
           setDeselectedIds(newIds)
           setDeselectedIds(deselectedIds.filter(id => id !== homeTeam.teamId))
         }
-        
-        
+        // setAllSelected(false)
+        setOnlySelectedShown(false)
+
         break;
         case 'away':
           if (awayIsSelected && isSelectable) {
@@ -51,6 +54,8 @@ const Game = ({game, players, buttonText, isSelectable, replaceFight, onSelect, 
             setAwayIsSelected(true)
             setDeselectedIds(deselectedIds.filter(id => id !== awayTeam.teamId))
           } 
+          // setAllSelected(false)
+          setOnlySelectedShown(false)
         break;
       default:
         break;

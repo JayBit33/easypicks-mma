@@ -17,7 +17,11 @@ const useStore = create((set) => ({
   numberOfLineupsShown: 0,
   setNumberOfLineupsShown: (amount) => set(state => ({ numberOfLineupsShown: amount})),
   savedPicks: [],
-  updateSavedPicks: (picks) => set(state => ({ savedPicks: [...picks]}))
+  updateSavedPicks: (picks) => set(state => ({ savedPicks: [...picks]})),
+  allSelected: false,
+  setAllSelected: (isSelected) => set(state => ({ allSelected: isSelected })),
+  onlySelectedShown: false,
+  setOnlySelectedShown: (selectedShown) => set(state => ({ onlySelectedShown: selectedShown }))
 }))
 
 export default useStore;

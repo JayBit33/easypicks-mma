@@ -34,6 +34,7 @@ const EasyPicks = () => {
     const updateInitialLineups = useStore(state => state.updateInitialLineups);
     const updateDisplayedLineups = useStore(state => state.updateDisplayedLineups);
     const selectedLineups = useStore(state => state.selectedLineups);
+    const updateSelectedLineups = useStore(state => state.updateSelectedLineups)
     const savedPicks = useStore(state => state.savedPicks);
     const updateSavedPicks = useStore(state => state.updateSavedPicks);
     const numberOfLineupsShown = useStore(state => state.numberOfLineupsShown);
@@ -135,13 +136,20 @@ const EasyPicks = () => {
       updateChosenGames([])
       updateDisplayedLineups([])
       updateInitialLineups([])
+      updateSelectedLineups([])
       setIsModalOpen(true)
     }
 
     const savePicks = (e) => {
       e.stopPropagation()
-      updateSavedPicks([...savedPicks, ...selectedLineups])
-      setToastMessage('Your Lineup Selections Have Been Saved')
+      if (selectedLineups.length > 0) {
+        updateSavedPicks([...savedPicks, ...selectedLineups])
+        setToastMessage('Your Lineup Selections Have Been Saved')
+        setTimeout(() => setToastMessage(null) , 2500);
+      } else {
+        setToastMessage('No Lineups Are Currently Selected')
+        setTimeout(() => setToastMessage(null) , 2500);
+      }
     }
 
     return (
@@ -167,8 +175,8 @@ const EasyPicks = () => {
                 replaceFight={replaceGame}
               />
               <LineupTable className="table" setErrorMessage={setToastMessage} />
-                <button className="clear" onClick={e => replaceAll(e)}>Replace All</button>
-                <button className="save" onClick={e => savePicks(e)}>Add Selected Lineup's To Picks</button>
+              <button className="clear" onClick={e => replaceAll(e)}>Replace All</button>
+              <button className="save" onClick={e => savePicks(e)}>Add Selected Lineup's To Picks</button>
             </Grid>
           </Content>
         </Wrapper>

@@ -9,8 +9,8 @@ import { PlayerIMG, Table, Wrapper } from './LineupTable.styles'
 import { AiFillDelete } from "react-icons/ai";
 
 const LineupTable = ({ setErrorMessage }) => {
-  const [allSelected, setAllSelected] = useState(false)
-  const [onlySelectedShown, setOnlySelectedShown] = useState(false)
+  // const [allSelected, setAllSelected] = useState(false)
+  // const [onlySelectedShown, setOnlySelectedShown] = useState(false)
   const [shownLineups, setShownLineups] = useState([])
 
   const displayedLineups = useStore(state => state.displayedLineups)
@@ -19,6 +19,10 @@ const LineupTable = ({ setErrorMessage }) => {
   const updateSelectedLineups = useStore(state => state.updateSelectedLineups)
   const deselectedIds = useStore(state => state.deselectedIds)
   const setNumberOfLineupsShown = useStore(state => state.setNumberOfLineupsShown)
+  const allSelected = useStore(state => state.allSelected)
+  const setAllSelected = useStore(state => state.setAllSelected)
+  const onlySelectedShown = useStore(state => state.onlySelectedShown)
+  const setOnlySelectedShown = useStore(state => state.setOnlySelectedShown)
 
   const selectAll = (e) => {
     e.stopPropagation()
@@ -63,6 +67,7 @@ const LineupTable = ({ setErrorMessage }) => {
     } else {
       if (selectedLineups.length === 0) {
         setErrorMessage('No Lineups Are Currently Selected')
+        setTimeout(() => setErrorMessage(null) , 3000);
       } else {
         // store off all current displayedLineups in a state variable before updating displayedLineups to show only selected lineups
         const shown = displayedLineups.filter(lineup => selectedLineups.map(lu => lu.id).includes(lineup.id))
