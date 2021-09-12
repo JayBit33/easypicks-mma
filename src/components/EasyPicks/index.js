@@ -16,8 +16,14 @@ import compute from '../../probabilities/pick6';
 // Styles
 import { Wrapper, Content, Grid } from './EasyPicks.styles';
 
+const PLAYER_KEY= 'players';
+sessionStorage.setItem(PLAYER_KEY, [])
+
 const EasyPicks = () => {
-    const [players, setPlayers] = useState([]);
+    const sessionPlayerData = sessionStorage.getItem('players');
+    let playersState = sessionPlayerData && sessionPlayerData !== [] ? JSON.parse(sessionPlayerData) : []
+
+    const [players, setPlayers] = useState(playersState);
     const [games, setGames] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isReplacing, setIsReplacing] = useState(false);
@@ -58,11 +64,14 @@ const EasyPicks = () => {
       setGames(gameInfo);
     }, [])
 
+    useEffect(() => {
+      sessionStorage.setItem(PLAYER_KEY, JSON.stringify(players))
+    },[players])
+
+
     // Runs on initial render and anytime chosenGames is updated
     useEffect(() => {
-
       const maxSalary = 50000
-
       const teamIds = chosenGames.map(game => {
         return [game.homeTeam.teamId, game.awayTeam.teamId]
       })
