@@ -1,10 +1,10 @@
 
 import { Content, Wrapper } from './Toast.styles';
 
-const Toast = ({ msg }) => {
+const Toast = ({ msg, isModalToast }) => {
 
   return (
-    <Wrapper>
+    <Wrapper isModalToast={isModalToast}>
       <Content>
         <h4>{msg}.</h4>
       </Content>

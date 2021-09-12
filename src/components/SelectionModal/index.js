@@ -66,11 +66,11 @@ const SelectionModal = ({ games, players, isReplacing, toggleModal }) => {
   return (
     <Wrapper>
       {
-        errorMessage && <Toast msg={errorMessage} />
+        errorMessage && <Toast msg={errorMessage} isModalToast={true} />
       }
       <>
       <h1 style={ errorMessage ? {'visibility': 'hidden' } : {}}>UFC Fight Night Aug 20</h1>
-      <h4 style={ errorMessage || isReplacing ?{'visibility': 'hidden' } : {}}>Choose the 6 matches you believe will contain the players with the highest fantasy points.</h4>
+      <h4 style={ errorMessage ?{'visibility': 'hidden' } : {}}>Choose the 6 matches you believe will contain the players with the highest fantasy points.</h4>
       </>
       <Grid>
       {games.map(game => {

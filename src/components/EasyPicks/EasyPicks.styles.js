@@ -15,12 +15,6 @@ export const Wrapper = styled.div`
      opacity: 1;`
   }
 
-  .toast {
-    margin-top: 3rem;
-    position: relative;
-    top: 3rem;
-  }
-
   .save {
     // float: right;
     // margin-right: 11rem;
