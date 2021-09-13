@@ -39,6 +39,7 @@ export const Table = styled.table`
     top: 0;
     z-index: 9;
     background-color: black;
+    color: white;
     padding: 1rem;
     margin-bottom: 2rem;
     

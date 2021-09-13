@@ -8,7 +8,7 @@ import { PlayerIMG, Table, Wrapper } from './LineupTable.styles'
 // Icons
 import { AiFillDelete } from "react-icons/ai";
 
-const LineupTable = ({ setErrorMessage }) => {
+const LineupTable = ({ isPicksList, savedLineups, setErrorMessage }) => {
   // const [allSelected, setAllSelected] = useState(false)
   // const [onlySelectedShown, setOnlySelectedShown] = useState(false)
   const [shownLineups, setShownLineups] = useState([])
@@ -95,7 +95,7 @@ const LineupTable = ({ setErrorMessage }) => {
 
   return (
     <Wrapper className="table">
-      <Table onClick={(e) => e.stopPropagation()}>
+      <Table onClick={(e) => e.stopPropagation()} isPicksList={isPicksList}>
         <thead>
           <tr>
             <th><input type="checkbox" onChange={ (e) => selectAll(e) } checked={allSelected} /></th>
@@ -106,11 +106,11 @@ const LineupTable = ({ setErrorMessage }) => {
             <th>Pick 5</th>
             <th>Pick 6</th>
             {/* <th>Total Salary</th> */}
-            <th><button onClick={showOnlySelected}>{ onlySelectedShown ? 'Show All' : 'Show Only Selected' }</button></th>
+            <th><button onClick={showOnlySelected}>{ isPicksList ? 'Delete Selected' : (onlySelectedShown ? 'Show All' : 'Show Only Selected') }</button></th>
           </tr>
         </thead>
         <tbody>
-          {shownLineups.map((lineup) => {
+          { !isPicksList ? shownLineups.map((lineup) => {
             {
               if (lineup.id !== '')
                 return (
@@ -129,7 +129,28 @@ const LineupTable = ({ setErrorMessage }) => {
                   </tr>
                 )
             }
-          })}
+          }) :
+          savedLineups.map((lineup) => {
+            {
+              if (lineup.id !== '')
+                return (
+                  <tr key={lineup.id}>
+                    <td><input type="checkbox" onChange={(e) => select(lineup, e)} checked={ selectedLineups.filter(sl => sl === lineup).length > 0 || allSelected} /></td>
+                      {lineup.teams.map(player => (
+                        <td key={player.teamId}>        
+                          <PlayerIMG src={player.playerImage160} alt='player image' className={`${true ? "active" : ""}`} />
+                        </td>
+                      ))}
+                    {/* <td>${lineup.totalSalary}</td> */}
+                    <td className="actions">
+                      <button onClick={(e) => select(lineup, e)} className={selectedLineups.filter(sl => sl === lineup).length > 0 ? 'selected' : ''}>{ selectedLineups.filter(sl => sl === lineup).length > 0 ? 'Selected' : 'Select' }</button>
+                      <AiFillDelete className="deleteBtn" onClick={() => removeLineup(lineup.id)} />
+                    </td>
+                  </tr>
+                )
+            }
+          })
+          }
         </tbody>
       </Table>
     </Wrapper>

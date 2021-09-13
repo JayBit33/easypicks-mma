@@ -174,7 +174,7 @@ const EasyPicks = () => {
                 players={players} 
                 replaceFight={replaceGame}
               />
-              <LineupTable className="table" setErrorMessage={setToastMessage} />
+              <LineupTable setErrorMessage={setToastMessage} />
               <button className="clear" onClick={e => replaceAll(e)}>Replace All</button>
               <button className="save" onClick={e => savePicks(e)}>Add Selected Lineup's To Picks</button>
             </Grid>
