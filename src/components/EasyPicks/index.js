@@ -38,6 +38,7 @@ const EasyPicks = () => {
     const savedPicks = useStore(state => state.savedPicks);
     const updateSavedPicks = useStore(state => state.updateSavedPicks);
     const numberOfLineupsShown = useStore(state => state.numberOfLineupsShown);
+    const setAllSelected = useStore(state => state.setAllSelected)
 
     useEffect(() => {
       // players will be an array of player objects that contains the following
@@ -118,26 +119,27 @@ const EasyPicks = () => {
       sessionStorage.setItem('chosenGames', JSON.stringify(chosenGames))
 
     }, [chosenGames, players, updateDisplayedLineups])
+    
+    const replaceAll = (e) => {
+      e.stopPropagation()
+      resetTable(false)
+      updateChosenGames([])
+      updateDisplayedLineups([])
+    }
 
     const replaceGame = (selectedGame) => {
       const selectionsMinusRemoval = chosenGames.filter(game => game.id !== selectedGame.id)
       updateChosenGames(selectionsMinusRemoval)
+      resetTable(true)
       console.log('updateChosenGames called from EasyPicks')
-      setIsReplacing(true)
-      setIsModalOpen(!isModalOpen)
-    }
-    
-    const toggleModal = () => {
-      setIsModalOpen(!isModalOpen)
     }
 
-    const replaceAll = (e) => {
-      e.stopPropagation()
-      updateChosenGames([])
-      updateDisplayedLineups([])
-      updateInitialLineups([])
+    const resetTable = (isBeingReplaced) => {
+      setIsReplacing(isBeingReplaced)
+      setAllSelected(false)
+      setIsModalOpen(!isModalOpen)
       updateSelectedLineups([])
-      setIsModalOpen(true)
+      updateInitialLineups([])
     }
 
     const savePicks = (e) => {
@@ -150,6 +152,10 @@ const EasyPicks = () => {
         setToastMessage('No Lineups Are Currently Selected')
         setTimeout(() => setToastMessage(null) , 2500);
       }
+    }
+
+    const toggleModal = () => {
+      setIsModalOpen(!isModalOpen)
     }
 
     return (
