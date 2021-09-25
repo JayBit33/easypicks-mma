@@ -126,9 +126,10 @@ export const Table = styled.table`
       font-size: 1.5rem;
       cursor: pointer;
       transition: .3s;
-  
+      color: lightgrey;
+
       :hover {
-        color: grey;
+        color: white;
       }
     }
 
